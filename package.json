@@ -1,0 +1,20 @@
+{
+  "name": "decodebitcoin.com",
+  "version": "1.0.0",
+  "description": "[Scaffolding]: https://rustwasm.github.io/docs/wasm-bindgen/examples/without-a-bundler.html",
+  "main": "webpack.config.js",
+  "scripts": {
+    "build": "webpack",
+    "serve": "webpack serve"
+  },
+  "author": "karliatto",
+  "dependencies": {
+    "@wasm-tool/wasm-pack-plugin": "^1.7.0",
+    "css-loader": "^7.1.2",
+    "html-webpack-plugin": "^5.6.3",
+    "mini-css-extract-plugin": "^2.9.2",
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
+  }
+}

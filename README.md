@@ -1,21 +1,11 @@
 # DecodeBitcoin.com
 
-[Scaffolding]: https://rustwasm.github.io/docs/wasm-bindgen/examples/without-a-bundler.html
+## Develop with webpack
 
-## Develop
+You can build the example locally with:
 
+```bash
+npm run serve
 ```
-$ wasm-pack build --target web
-```
 
-Then serve this directory in your favorite webserver and navigate to `host:port`
-to open the index.html in your browser:
-
-```
-# static server from https://crates.io/crates/https
-http
-
-# or use python
-python2 -m SimpleHTTPServer
-python3 -m http.server
-```
+and then visiting http://localhost:8080 in a browser should run the example!
