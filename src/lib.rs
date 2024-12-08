@@ -21,11 +21,6 @@ fn main() -> Result<(), JsValue> {
 }
 
 #[wasm_bindgen]
-pub fn add(a: u32, b: u32) -> u32 {
-    a + b
-}
-
-#[wasm_bindgen]
 pub fn decode(transaction_hex: String) -> Result<String, JsValue> {
     let transaction_bytes = hex::decode(&transaction_hex)
         .map_err(|e| JsValue::from_str(&format!("Hex decode error: {}", e)))?;
