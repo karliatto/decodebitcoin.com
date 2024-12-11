@@ -3,6 +3,7 @@
 This is a experimental project using Rust and WASM to decode Bitcoin.
 
 - [x] Bitcoin Transactions
+- [x] Bip39 XOR
 - [] Bip21
 - [] bolt11
 - [] bolt12

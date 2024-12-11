@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">
+      <section class="title">
+        <div class="title-text">XOR bip39 words</div>
+        <div class="title-subtitle">
+          Introduce 2 bip39 words to get XORed one
+        </div>
+      </section>
+      <section class="content">
+        <div class="content-row">
+          <div class="bip39-word-input">
+            <input
+              id="bip39-word-input-fist"
+              class="input-text"
+              type="text"
+              placeholder="Enter bip39 word"
+            />
+            <input
+              id="bip39-word-input-second"
+              class="input-text"
+              type="text"
+              placeholder="Enter bip39 word"
+            />
+          </div>
+          <div class="xor-bip39-submit-container">
+            <button id="xor-bip39-submit-button" class="button" type="submit">
+              XOR
+            </button>
+          </div>
+        </div>
+        <div class="json-container">
+          <h1>XOR</h1>
+          <pre id="json-display"></pre>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
