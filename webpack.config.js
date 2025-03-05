@@ -5,8 +5,8 @@ const WasmPackPlugin = require("@wasm-tool/wasm-pack-plugin");
 
 module.exports = {
   entry: {
-    main: "./index.js",
-    xor: "./xor.js",
+    main: "./src-web/index.js",
+    xor: "./src-web/xor.js",
   },
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -14,11 +14,11 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "index.html",
+      template: "src-web/index.html",
       chunks: ["main"],
     }),
     new HtmlWebpackPlugin({
-      template: "xor.html",
+      template: "src-web/xor.html",
       filename: "xor.html",
       chunks: ["xor"],
     }),

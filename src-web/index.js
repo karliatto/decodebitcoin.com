@@ -1,4 +1,4 @@
-import { decode } from "./pkg";
+import { decode } from "./../pkg";
 import("./index.css");
 
 const buttons = document.querySelectorAll("button");

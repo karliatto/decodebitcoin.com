@@ -1,4 +1,4 @@
-import { xor } from "./pkg";
+import { xor } from "./../pkg";
 import("./index.css");
 
 const buttons = document.querySelectorAll("button");
