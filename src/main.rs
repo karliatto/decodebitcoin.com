@@ -4,8 +4,11 @@ use std::process;
 use serde_json;
 use hex; 
 
-use self::transaction::{Decodable, Transaction};
 mod transaction;
+use self::transaction::{Decodable, Transaction};
+
+mod bip32;
+use self::bip32::get_wallet;
 
 pub fn decode(transaction_hex: String) -> Result<String, Box<dyn Error>> {
     let transaction_bytes = hex::decode(&transaction_hex)
@@ -17,13 +20,58 @@ pub fn decode(transaction_hex: String) -> Result<String, Box<dyn Error>> {
     Ok(json_output)
 }
 
-fn main() {
-    let transaction_hex = env::args().nth(1).expect("Please provide a transaction hex string");
+pub fn derive_keys_from_xpriv(extended_private_key: String) {
+    let wallet = get_wallet(extended_private_key);
     
-    match decode(transaction_hex) {
-        Ok(result) => println!("Decoded transaction:\n{}", result),
+    match wallet {
+        Ok(wallet) => {
+            // Print the derived wallet to standard output
+            println!("Derived wallet: {:?}", wallet);
+        },
         Err(e) => {
-            eprintln!("Error: {}", e);
+            // Print the error to standard error
+            eprintln!("Failed to derive wallet: {}", e);
+        },
+    }}
+
+fn main() {
+    // Check if at least one argument is provided
+    let args: Vec<String> = env::args().collect();
+    if args.len() < 2 {
+        eprintln!("Usage: {} <command> <args>", args[0]);
+        eprintln!("Commands:");
+        eprintln!("  decode <transaction_hex>");
+        eprintln!("  derive <extended_private_key>");
+        process::exit(1);
+    }
+
+    let command = &args[1];
+
+    match command.as_str() {
+        "decode" => {
+            if args.len() < 3 {
+                eprintln!("Usage: {} decode <transaction_hex>", args[0]);
+                process::exit(1);
+            }
+            let transaction_hex = args[2].clone();
+            match decode(transaction_hex) {
+                Ok(result) => println!("Decoded transaction:\n{}", result),
+                Err(e) => {
+                    eprintln!("Error: {}", e);
+                    process::exit(1);
+                }
+            }
+        },
+        "derive" => {
+            if args.len() < 3 {
+                eprintln!("Usage: {} derive <extended_private_key>", args[0]);
+                process::exit(1);
+            }
+            let extended_private_key = args[2].clone();
+            derive_keys_from_xpriv(extended_private_key);
+        },
+        _ => {
+            eprintln!("Unknown command: {}", command);
             process::exit(1);
         }
     }
