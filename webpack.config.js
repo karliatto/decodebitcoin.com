@@ -10,7 +10,8 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "[name].js",
+    filename: "[name].[contenthash].js",
+    clean: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -22,12 +23,14 @@ module.exports = {
       filename: "xor.html",
       chunks: ["xor"],
     }),
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "[name].[contenthash].css",
+    }),
     new WasmPackPlugin({
       crateDirectory: path.resolve(__dirname, "."),
     }),
   ],
-  mode: "development",
+  mode: "production",
   experiments: {
     asyncWebAssembly: true,
   },
@@ -38,5 +41,18 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
     ],
+  },
+  optimization: {
+    moduleIds: 'deterministic',
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
   },
 };

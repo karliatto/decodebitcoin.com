@@ -1,5 +1,5 @@
 import { xor } from "./../pkg";
-import("./css/index.css");
+import "./css/index.css";
 
 const buttons = document.querySelectorAll("button");
 buttons.forEach((button) => {

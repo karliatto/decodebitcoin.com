@@ -1,42 +1,68 @@
-# DecodeBitcoin.com
+ DecodeBitcoin.com
 
-This is a experimental project using Rust and WASM to decode Bitcoin.
+This is an experimental project using Rust and WASM to decode Bitcoin-related data.
 
-- [x] Bitcoin Transactions decoding
+## Features
+
+- [x] Bitcoin Transaction decoding
 - [x] BIP 39 XOR
 - [ ] BIP 32
-- [] Bip21
-- [] bolt11
-- [] bolt12
-  ...
+- [ ] BIP 21
+- [ ] BOLT 11
+- [ ] BOLT 12
 
-## Run web server with WASM
+## Web Interface
 
-You can build the example locally with:
+### Development Server
+
+Run the development server with:
 
 ```bash
 npm run serve
 ```
 
-and then visiting http://localhost:8080 in a browser should run the example!
+Then visit http://localhost:8080 in your browser.
 
+### Production Build
 
-## Build and run CLI
+Build and serve the production version:
 
-* Decode Bitcoin Transaction
-
+```bash
+npm run build
 ```
+
+#### Serving Options
+
+1. Using Python's HTTP server:
+```bash
+cd dist
+python3 -m http.server 8080
+```
+
+2. Using Nginx:
+   - Copy the `dist` directory contents to your web root
+   - Add WASM MIME type to your Nginx configuration:
+```nginx
+types {
+    application/wasm wasm;
+}
+```
+
+## CLI Usage
+
+### Decode Bitcoin Transaction
+
+```bash
 cargo run --bin decodebitcoin-cli -- decode <transaction_hex>
 ```
 
-* Derive from an xpriv
+### Derive from Extended Private Key
 
-```
+```bash
 cargo run --bin decodebitcoin-cli -- derive <xpriv>
 ```
 
-Like: 
-
-```
+Example:
+```bash
 cargo run --bin decodebitcoin-cli -- derive tprv8ZgxMBicQKsPczGmwTSuQwPSVoqEyXBxinSRRVHieeF7FUi8eZVh46dRJUSPr8tofmC1TymdPMGYmu6TakaEQaA27VMYZxHs4pcekFTotCC
 ```
