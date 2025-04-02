@@ -17,7 +17,6 @@ use hex::FromHex;
 use serde_json::Value;
 use std::collections::{HashMap, HashSet};
 
-
 #[derive(Debug)]
 pub enum DerivationError {
     ParseError(String),
@@ -142,7 +141,6 @@ pub fn hash160(input: &[u8]) -> Vec<u8> {
     ripemd160_result.to_vec()
 }
 
-
 // Decode a base58 string into an array of bytes
 fn base58_decode(base58_string: &str) -> Vec<u8> {
     let base58_alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
@@ -219,7 +217,6 @@ fn read_key(extended_key_bytes: &mut &[u8]) -> [u8; 33] {
 
     buffer
 }
-
 
 // Deserialize the extended pubkey bytes and return a ExKey object
 // Bip32 Serialization format: https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#serialization-format
@@ -355,8 +352,7 @@ fn get_p2wpkh_program(pubkey: &[u8]) -> Vec<u8> {
     script_pub_key
 }
 
-
-pub fn get_wallet(extended_private_key: String) ->  Result<Wallet, DerivationError> {
+pub fn get_wallet(extended_private_key: String) -> Result<Wallet, DerivationError> {
     let decoded_extended_private_key = base58_decode(&extended_private_key);
     let extended_key = deserialize_key(&decoded_extended_private_key);
     let mut private_keys: HashMap<u16, String> = HashMap::new();
@@ -370,8 +366,6 @@ pub fn get_wallet(extended_private_key: String) ->  Result<Wallet, DerivationErr
         let hex_child_private_key = bytes_to_hex(&child_extended_key.key[1..]);
         let child_public_key = derive_public_key_from_private(&child_extended_key.key[1..]);
         let witness_program = get_p2wpkh_program(&child_public_key);
-
-    
 
         private_keys.insert(index, hex_child_private_key.clone());
         witness_programs.insert(bytes_to_hex(&witness_program));
