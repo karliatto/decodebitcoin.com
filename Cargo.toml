@@ -6,6 +6,7 @@ publish = false
 version = "0.0.1"
 
 [lib]
+path = "src/wasm.rs"
 crate-type = ["cdylib"]
 
 [dependencies]
@@ -15,3 +16,11 @@ hex = "0.4.3"
 serde = { version = "1.0", features = ["derive"]}
 serde_json = "1.0.132"
 sha2 = "0.10.8"
+
+[[bin]]
+name = "decodebitcoin-wasm"
+path = "src/wasm.rs"
+
+[[bin]]
+name = "decodebitcoin-cli"
+path = "src/main.rs"

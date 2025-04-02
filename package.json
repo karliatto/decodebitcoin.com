@@ -1,7 +1,7 @@
 {
   "name": "decodebitcoin.com",
   "version": "1.0.0",
-  "description": "[Scaffolding]: https://rustwasm.github.io/docs/wasm-bindgen/examples/without-a-bundler.html",
+  "description": "Decoding Bitcoin Stuff",
   "main": "webpack.config.js",
   "scripts": {
     "build": "webpack",
