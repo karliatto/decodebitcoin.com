@@ -1,5 +1,5 @@
 import { decode } from "./../pkg";
-import("./index.css");
+import("./css/index.css");
 
 const buttons = document.querySelectorAll("button");
 buttons.forEach((button) => {
