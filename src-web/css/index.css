@@ -29,14 +29,14 @@ body {
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 25px;
+  padding: 20px 15px;
 }
 
 @media (min-width: 48rem) {
   .title {
-    align-items: center;
     padding: 40px 0;
     margin-bottom: 45px;
   }
@@ -55,7 +55,7 @@ body {
 }
 
 .title-subtitle {
-  text-align: left;
+  text-align: center;
   color: #979797;
   padding-top: 20px;
   font-weight: 900;
@@ -64,7 +64,6 @@ body {
 
 @media (min-width: 48rem) {
   .title-subtitle {
-    text-align: center;
     font-size: 24px;
   }
 }
@@ -91,6 +90,7 @@ body {
   position: relative;
   width: 100%;
   margin-bottom: 20px;
+  padding: 0 15px;
 }
 
 @media (min-width: 48rem) {
@@ -98,6 +98,7 @@ body {
     width: 100%;
     max-width: 700px;
     flex-direction: row;
+    padding: 0;
   }
 }
 
@@ -106,14 +107,6 @@ body {
   width: 100%;
   display: flex;
   flex-direction: row;
-}
-
-@media (min-width: 48rem) {
-  .input-text {
-    font-size: 24px;
-    min-width: 540px;
-    padding: 20px 25px 20px 75px;
-  }
 }
 
 .input-text {
@@ -126,6 +119,15 @@ body {
   outline: none;
   color: #f3f3f3;
   font-family: "OpenSans", sans-serif;
+  width: 100%;
+}
+
+@media (min-width: 48rem) {
+  .input-text {
+    font-size: 24px;
+    min-width: 540px;
+    padding: 20px 25px 20px 75px;
+  }
 }
 
 .raw-tx-submit-container {
@@ -133,12 +135,14 @@ body {
   flex-direction: row;
   position: relative;
   margin-top: 20px;
+  width: 100%;
 }
 
 @media (min-width: 48rem) {
   .raw-tx-submit-container {
     margin-top: 0;
     padding-left: 10px;
+    width: auto;
   }
 }
 
@@ -153,6 +157,7 @@ body {
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
   outline: none;
+  width: 100%;
 }
 
 .button:hover {
@@ -168,6 +173,7 @@ body {
 @media (min-width: 48rem) {
   .button {
     font-size: 24px;
+    width: auto;
   }
 }
 
