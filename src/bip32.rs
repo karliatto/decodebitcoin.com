@@ -103,7 +103,7 @@ impl DerivationPath {
                 match index.parse::<u32>() {
                     Ok(number) => path.push(DerivationType::Hardened(number)),
                     Err(e) => {
-                        println!("Failed to parse the number: {}", e); // Handle the error
+                        println!("Failed to parse the number: {}", e);
                     }
                 }
             } else {
@@ -112,7 +112,7 @@ impl DerivationPath {
                         path.push(DerivationType::Normal(number));
                     }
                     Err(e) => {
-                        println!("Failed to parse the number: {}", e); // Handle the error
+                        println!("Failed to parse the number: {}", e);
                     }
                 }
             }
@@ -218,7 +218,6 @@ fn read_key(extended_key_bytes: &mut &[u8]) -> [u8; 33] {
     buffer
 }
 
-// Deserialize the extended pubkey bytes and return a ExKey object
 // Bip32 Serialization format: https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#serialization-format
 fn deserialize_key(bytes: &[u8]) -> ExKey {
     let mut bytes_slice = bytes;
