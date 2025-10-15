@@ -263,7 +263,6 @@ fn get_child_key_at_path(key: &ExKey, derivation_path: &str) -> Result<ExKey, De
 }
 
 fn derive_public_key_from_private(key: &[u8]) -> Vec<u8> {
-    // unimplemented!("implement the logic")
     let secp = Secp256k1::new();
     let secret_key = SecretKey::from_slice(&key).expect("32 bytes, within curve order");
     let public_key = PublicKey::from_secret_key(&secp, &secret_key);
