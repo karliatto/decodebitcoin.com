@@ -1,15 +1,6 @@
- DecodeBitcoin.com
+# decodebitcoin.com
 
 This is an experimental project using Rust and WASM to decode Bitcoin-related data.
-
-## Features
-
-- [x] Bitcoin Transaction decoding
-- [x] BIP 39 XOR
-- [ ] BIP 32
-- [ ] BIP 21
-- [ ] BOLT 11
-- [ ] BOLT 12
 
 ## Web Interface
 
