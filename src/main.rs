@@ -1,4 +1,5 @@
 use hex;
+use miniscript::bitcoin;
 use serde_json;
 use std::env;
 use std::error::Error;
@@ -9,6 +10,9 @@ use self::transaction::{Decodable, Transaction};
 
 mod bip32;
 use self::bip32::get_wallet;
+
+mod policy;
+use self::policy::{get_policy_info, MiniscriptKeyType};
 
 pub fn decode(transaction_hex: String) -> Result<String, Box<dyn Error>> {
     let transaction_bytes =
@@ -70,6 +74,25 @@ fn main() {
             }
             let extended_private_key = args[2].clone();
             derive_keys_from_xpriv(extended_private_key);
+        }
+        "policy" => {
+            if args.len() < 3 {
+                eprintln!("Usage: {} policy <policy_str>", args[0]);
+                process::exit(1);
+            }
+            let policy_str = args[2].as_str();
+
+            if let Ok(info) =
+                get_policy_info::<bitcoin::PublicKey>(policy_str, MiniscriptKeyType::PublicKey)
+            {
+                println!("Policy info: {:?}", info);
+            } else {
+                // Then try with strings.
+                match get_policy_info::<String>(policy_str, MiniscriptKeyType::String) {
+                    Ok(info) => println!("Policy info: {:?}", info),
+                    Err(e) => eprintln!("Error retrieving policy info: {}", e),
+                }
+            }
         }
         _ => {
             eprintln!("Unknown command: {}", command);

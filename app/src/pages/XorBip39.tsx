@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { xor } from "./../../../pkg";
+import { xor } from "@pkg/decodebitcoin_dot_com.js";
 
 export default function XorBip39() {
   const [firstWord, setFirstWord] = useState('')

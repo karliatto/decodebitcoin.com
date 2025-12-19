@@ -1,8 +1,11 @@
+use ::miniscript::bitcoin;
 use wasm_bindgen::prelude::*;
 mod transaction;
 use self::transaction::{Decodable, Transaction};
 use self::xor::{get_bip39_index_by_word, xor_bits, Xor};
+mod policy;
 mod xor;
+use self::policy::{get_policy_info, MiniscriptKeyType};
 
 // Called when the Wasm module is instantiated
 #[wasm_bindgen(start)]
@@ -59,4 +62,33 @@ pub fn xor(word_a: &str, word_b: &str) -> Result<String, JsValue> {
     });
     Ok(serde_json::to_string_pretty(&xor_result)
         .map_err(|e| JsValue::from_str(&format!("Serialization error: {}", e)))?)
+}
+
+#[wasm_bindgen]
+pub fn policy(policy_str: &str) -> Result<String, JsValue> {
+    if let Ok(info) =
+        get_policy_info::<bitcoin::PublicKey>(policy_str, MiniscriptKeyType::PublicKey)
+    {
+        Ok(serde_json::to_string_pretty(&info).map_err(|e| {
+            let msg = format!("Serialization error: {}", e);
+            web_sys::console::error_1(&JsValue::from_str(&msg));
+            JsValue::from_str(&msg)
+        })?)
+    } else {
+        match get_policy_info::<String>(policy_str, MiniscriptKeyType::String) {
+            Ok(info) => match serde_json::to_string_pretty(&info) {
+                Ok(json_str) => Ok(json_str),
+                Err(e) => {
+                    let msg = format!("Serialization error: {}", e);
+                    web_sys::console::error_1(&JsValue::from_str(&msg));
+                    Err(JsValue::from_str(&msg))
+                }
+            },
+            Err(e) => {
+                let msg = format!("Policy parse error: {}", e);
+                web_sys::console::error_1(&JsValue::from_str(&msg));
+                Err(JsValue::from_str(&msg))
+            }
+        }
+    }
 }

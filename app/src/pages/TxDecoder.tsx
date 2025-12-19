@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { decode } from "./../../../pkg";
+import { decode } from "@pkg/decodebitcoin_dot_com.js";
 
 export default function TxDecoder()  {
   const [rawTx, setRawTx] = useState('')
@@ -45,7 +45,7 @@ export default function TxDecoder()  {
           <div style={{ color: 'tomato' }}>{error}</div>
         )}
         {prettyResult && (
-          <pre style={{ background: 'rgba(0,0,0,0.3)', padding: 12, borderRadius: 6, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>{prettyResult}</pre>
+          <pre style={{ background: 'rgba(0,0,0,0.3)', padding: 12, borderRadius: 6, whiteSpace: 'pre-wrap', wordBreak: 'break-word', textAlign: 'left' }}>{prettyResult}</pre>
         )}
       </div>
     </div>
