@@ -4,6 +4,7 @@ import About from './pages/About'
 import XorBip39 from './pages/XorBip39'
 import TxDecoder from './pages/TxDecoder'
 import PolicyInfoDecoder from './pages/PolicyInfoDecoder'
+import MnemonicToDescriptor from './pages/MnemonicToDescriptor'
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
         <nav style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           <Link to="/" style={{ color: '#fff' }}>Transaction Decoder</Link>
           <Link to="/policy" style={{ color: '#fff' }}>Miniscript Policy Info Decoder</Link>
+          <Link to="/mnemonic" style={{ color: '#fff' }}>Mnemonic to Descriptor</Link>
           <Link to="/xorbip39" style={{ color: '#fff' }}>XOR BIP39</Link>
           <Link to="/about" style={{ color: '#fff' }}>About</Link>
         </nav>
@@ -22,6 +24,7 @@ export default function App() {
           <Route path="/" element={<TxDecoder />} />
           <Route path="/xorbip39" element={<XorBip39 />} />
           <Route path="/policy" element={<PolicyInfoDecoder />} />
+          <Route path="/mnemonic" element={<MnemonicToDescriptor />} />
           <Route path="/about" element={<About />} />
         </Routes>
       </main>

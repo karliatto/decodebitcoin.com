@@ -3,8 +3,10 @@ use wasm_bindgen::prelude::*;
 mod transaction;
 use self::transaction::{Decodable, Transaction};
 use self::xor::{get_bip39_index_by_word, xor_bits, Xor};
+mod mnemonic_to_descriptor;
 mod policy;
 mod xor;
+use self::mnemonic_to_descriptor::{from_mnemonic_to_descriptor, import_desc};
 use self::policy::{get_policy_info, MiniscriptKeyType};
 
 // Called when the Wasm module is instantiated
@@ -91,4 +93,32 @@ pub fn policy(policy_str: &str) -> Result<String, JsValue> {
             }
         }
     }
+}
+
+#[wasm_bindgen(js_name = mnemonicToDescriptor)]
+pub fn mnemonic_to_descriptor(
+    mnemonic: &str,
+    passphrase: &str,
+    network: &str,
+) -> Result<String, JsValue> {
+    let network_kind = match network {
+        "main" => bitcoin::NetworkKind::Main,
+        "test" => bitcoin::NetworkKind::Test,
+        _ => return Err(JsValue::from_str("Invalid network: use \"main\" or \"test\"")),
+    };
+
+    let descriptors = from_mnemonic_to_descriptor(mnemonic, passphrase, network_kind)
+        .ok_or_else(|| JsValue::from_str("Failed to derive descriptors from mnemonic"))?;
+
+    serde_json::to_string_pretty(&descriptors)
+        .map_err(|e| JsValue::from_str(&format!("Serialization error: {}", e)))
+}
+
+#[wasm_bindgen(js_name = importDescriptor)]
+pub fn import_descriptor(descriptor_str: &str) -> Result<String, JsValue> {
+    let descriptor: miniscript::Descriptor<String> = descriptor_str
+        .parse()
+        .map_err(|e| JsValue::from_str(&format!("Invalid descriptor: {}", e)))?;
+
+    Ok(import_desc(descriptor))
 }

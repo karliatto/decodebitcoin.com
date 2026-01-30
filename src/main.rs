@@ -14,6 +14,8 @@ use self::bip32::get_wallet;
 mod policy;
 use self::policy::{get_policy_info, MiniscriptKeyType};
 
+mod mnemonic_to_descriptor;
+
 pub fn decode(transaction_hex: String) -> Result<String, Box<dyn Error>> {
     let transaction_bytes =
         hex::decode(&transaction_hex).map_err(|e| format!("Hex decode error: {}", e))?;

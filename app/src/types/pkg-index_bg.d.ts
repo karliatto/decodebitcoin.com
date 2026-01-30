@@ -4,6 +4,8 @@ declare module '../../../pkg/index_bg.js' {
   export function decode(transaction_hex: string): string
   export function xor(a: string, b: string): string
   export function policy(s: string): string
+  export function mnemonicToDescriptor(mnemonic: string, passphrase: string, network: string): string
+  export function importDescriptor(descriptor: string): string
 }
 
 declare module './../../../pkg/index_bg.js' {
@@ -11,6 +13,8 @@ declare module './../../../pkg/index_bg.js' {
   export function decode(transaction_hex: string): string
   export function xor(a: string, b: string): string
   export function policy(s: string): string
+  export function mnemonicToDescriptor(mnemonic: string, passphrase: string, network: string): string
+  export function importDescriptor(descriptor: string): string
 }
 
 
